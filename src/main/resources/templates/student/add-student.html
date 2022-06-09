@@ -1,0 +1,557 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title></title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{../../css/app.css}"/>
+
+
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/}"><img th:class="logo-img" th:src="@{../../images/logo.png}" alt="logo"></a>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a th:href="@{/}"><i class="fa-solid fa-gauge mr-2"></i>Dashboard</a>
+            </li>
+            <li class="active">
+
+                <a href="#studentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i>Talaba</a>
+                <ul class="collapse list-unstyled" id="studentSubmenu">
+                    <li>
+                        <a th:href="@{/student/add-student}">Talaba qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/student/list-student}">Talabalar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#facultySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-regular fa-building mr-2"></i>Fakultet</a>
+                <ul class="collapse list-unstyled" id="facultySubmenu">
+                    <li>
+                        <a th:href="@{/faculty/add-faculty}">Fakultet qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/faculty/list-faculty}">Fakultetlar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#specialitySubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
+                    <i class="fa-solid fa-briefcase mr-2"></i>Mutahasislik</a>
+                <ul class="collapse list-unstyled" id="specialitySubmenu">
+                    <li>
+                        <a th:href="@{/speciality/add-speciality}">Mutahasislik qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/speciality/list-speciality}">Mutahasisliklar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#orderSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-solid fa-file mr-2"></i>Buyruq</a>
+                <ul class="collapse list-unstyled" id="orderSubmenu">
+                    <li>
+                        <a th:href="@{/order/add-order}">Buyruq qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/order/list-order}">Buyruqlar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-solid fa-users mr-2"></i>Admin</a>
+                <ul class="collapse list-unstyled" id="adminSubmenu">
+                    <li>
+                        <a th:href="@{/admin/add-admin}">Admin qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/list-admin}">Adminlar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" th:class="mb-0">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fa-solid fa-align-justify"></i>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+
+                        <li class="nav-item active">
+                            <a th:href="@{/logout}">
+                                <i class="fa-solid fa-right-from-bracket mr-2"></i> Chiqish
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h2>Add Student</h2>
+        <!--/*@thymesVar id="error" type="aj"*/-->
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+        <div class="panel-group">
+            <form th:action="@{/student/add-student}" method="post" enctype="multipart/form-data">
+                <div class="panel-group">
+                    <!--Information about education-->
+                    <div class="panel panel-default shadow border-radius">
+                        <div class="panel-heading"
+                             style="background-color: #f5f5f5; padding: 8px 15px; border: 1px solid transparent;">
+                            Information about education
+                        </div>
+                        <div class="panel-body" style="padding: 15px">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="faculty">Faculty</label>
+                                        <select type="text" class="form-control" id="faculty" name="facultyId"
+                                                th:object="${faculties}" required>
+                                            <option value="">select</option>
+                                            <option th:each="faculty : ${faculties}" th:value="${faculty.id}"
+                                                    th:text="${faculty.name}" ></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="speciality">Speciality</label>
+                                        <select type="number" class="form-control" id="speciality"
+                                                th:object="${specialities}" name="specialityId" required>
+                                            <option value="">select</option>
+                                            <option th:each="speciality : ${specialities}" th:value="${speciality.id}"
+                                                    th:text="${speciality.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="groupName">Group Name</label>
+                                        <input type="text" class="form-control" id="groupName" placeholder="Group Name" name="groupName" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="admissionDate">Admission Date</label>
+                                        <input type="date" class="form-control" id="admissionDate"
+                                                name="admissionDate" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="paymentForm">Payment form</label>
+                                        <select type="number" class="form-control" id="paymentForm" name="paymentForm"
+                                                required>
+                                            <option value="">select</option>
+                                            <option value="Contract">Contract</option>
+                                            <option value="Budget">Budget</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="admissionOrder">Order</label>
+                                        <select type="number" class="form-control" id="admissionOrder"
+                                                name="orderId" th:object="${orders}" required>
+                                            <option value="">Select</option>
+                                            <option th:each="order : ${orders}" th:value="${order.id}" th:text="${order.name}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Information about passport data-->
+                    <div class="panel panel-default shadow border-radius mt-2 top-border-radius">
+                        <div class="panel-heading" style="background-color: #f5f5f5; padding: 8px 15px">Passport Date
+                        </div>
+                        <div class="panel-body" style="padding: 15px">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="citizenship">Citizenship</label>
+                                                <select type="number" class="form-control" id="citizenship"
+                                                        name="citizenship" required>
+                                                    <option value="">select</option>
+                                                    <option value="Uzbekistan">Uzbekistan</option>
+                                                    <option value="Russia">Russia</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="passportNumber">Passport Number</label>
+                                                <input type="text" class="form-control" id="passportNumber"
+                                                       placeholder="AA1234567" name="passportNumber" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="pin">PIN</label>
+                                                <input type="number" class="form-control" id="pin" placeholder="JSHSHR"
+                                                       name="pin" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="lastName">Lastname</label>
+                                                <input type="text" class="form-control" id="lastName"
+                                                       placeholder="Lastname" name="lastName" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="firstName">Firstname</label>
+                                                <input type="text" class="form-control" id="firstName"
+                                                       placeholder="Firstname" name="firstName" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="patronymic">Patronymic</label>
+                                                <input type="text" class="form-control" id="patronymic"
+                                                       placeholder="Patronymic" name="patronymic" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="dateOfBirth">Date of birth</label>
+                                                <input type="date" class="form-control" id="dateOfBirth"
+                                                       name="dateOfBirth" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="gender">Gender</label>
+                                                <select type="number" class="form-control" id="gender" name="gender"
+                                                        required>
+                                                    <option value="">select</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <!--Order number-->
+                                                <label for="nationality">Nationality</label>
+                                                <select type="number" class="form-control" id="nationality"
+                                                        name="nationality" required>
+                                                    <option value="">select</option>
+                                                    <option value="Uzbek">Uzbek</option>
+                                                    <option value="Rus">Rus</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="image-box margin-bottom-sm">
+                                        <img src="/" alt="" id="preview" class="image">
+                                    </div>
+
+                                    <input type="hidden" id="photo" name="photo">
+                                    <label for="inputPhoto" class="btn btn-success btn-block">Download</label>
+                                    <input type="file" id="inputPhoto" accept="image/png,image/jpeg"
+                                           style="display: none" name="studentPhoto" onchange="loadPhoto(this)" required>
+                                    <button class="btn btn-default btn-block" onclick="clearPhoto(); return false;">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Information about additional data-->
+                    <div class="panel panel-default shadow border-radius mt-2">
+                        <div class="panel-heading" style="background-color: #f5f5f5; padding: 8px 15px">Additional
+                            data
+                        </div>
+                        <div class="panel-body" style="padding: 15px">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="socialCategory">Social Category</label>
+                                        <select type="number" class="form-control" id="socialCategory"
+                                                name="socialCategory" required>
+                                            <option value="">select</option>
+                                            <option value="Orphans with full state support">Orphans with full state support</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="studentCategory">Student Category</label>
+                                        <select type="number" class="form-control" id="studentCategory"
+                                                name="studentCategory" required>
+                                            <option value="">select</option>
+                                            <option value="Super Contract">Super Contract</option>
+                                            <option value="Contract">Contract</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="previousEducation">Previous Education</label>
+                                        <select type="number" class="form-control" id="previousEducation"
+                                                name="previousEducation" required>
+                                            <option value="">select</option>
+                                            <option value="School">School</option>
+                                            <option value="College">College</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Information about permanent address-->
+                    <div class="panel panel-default shadow border-radius mt-2">
+                        <div class="panel-heading" style="background-color: #f5f5f5; padding: 8px 15px">Permanent
+                            Address
+                        </div>
+                        <div class="panel-body" style="padding: 15px">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="country">Country</label>
+                                        <select type="number" class="form-control" id="country" name="permanentCountry" required>
+                                            <option value="">select</option>
+                                            <option value="Uzbekistan">Uzbekistan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="permanentRegion">Region</label>
+                                        <input type="text" class="form-control" id="permanentRegion"
+                                               placeholder="Region" name="permanentRegion" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="permanentDistrict">District</label>
+                                        <input type="text" class="form-control" id="permanentDistrict"
+                                               placeholder="District" name="permanentDistrict" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="permanentAddress">Address</label>
+                                        <input type="text" class="form-control" id="permanentAddress"
+                                               placeholder="Address" name="permanentAddress" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Information about current address-->
+                    <div class="panel panel-default shadow border-radius mt-2">
+                        <div class="panel-heading top-border-radius"
+                             style="background-color: #f5f5f5; padding: 8px 15px; border: 1px solid transparent;">
+                            Current Address
+                        </div>
+                        <div class="panel-body" style="padding: 15px">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="currentRegion">Region</label>
+                                        <input type="text" class="form-control" id="currentRegion" placeholder="Region"
+                                               name="currentRegion" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="currentDistrict">Current District</label>
+                                        <input type="text" class="form-control" id="currentDistrict"
+                                               placeholder="District" name="currentDistrict" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="currentAddress">Current address</label>
+                                        <input type="text" class="form-control" id="currentAddress"
+                                               placeholder="Address" name="currentAddress" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="statusResidence">Status Residence</label>
+                                        <select type="number" class="form-control" id="statusResidence"
+                                                name="statusResidence" required>
+                                            <option value="">select</option>
+                                            <option value="Green area">Green area</option>
+                                            <option value="Yellow area">Yellow area</option>
+                                            <option value="Red area">Red area</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="countRoommates">Count roommates</label>
+                                        <input type="number" class="form-control" id="countRoommates"
+                                               placeholder="Count roommates" name="countRoommates" min="0" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="categoryRoommates">Category Roommates</label>
+                                        <select type="number" class="form-control" id="categoryRoommates"
+                                                name="categoryRoommates" required>
+                                            <option value="">select</option>
+                                            <option value="Parent">Parent</option>
+                                            <option value="Family">Family</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Information about contact data-->
+                    <div class="panel panel-default shadow border-radius mt-2">
+                        <div class="panel-heading top-border-radius"
+                             style="background-color: #f5f5f5; padding: 8px 15px; border: 1px solid transparent;">
+                            Contact data
+                        </div>
+                        <div class="panel-body" style="padding: 15px">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" placeholder="Email" id="email"
+                                               name="email" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="studentPhone">Student phone</label>
+                                        <input type="text" class="form-control" id="studentPhone"
+                                               placeholder="Student phone number" name="studentPhone" required/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <!--Order number-->
+                                        <label for="parentPhone">Parent phone</label>
+                                        <input type="text" class="form-control" id="parentPhone"
+                                               placeholder="Parent phone" name="parentPhone" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="row">
+                            <div class="col-sm-10"></div>
+                            <div class="col-sm-2">
+                                <div class="row">
+                                    <div class="col-sm-6"></div>
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-primary shadow w-100">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <!-- Footer -->
+        <footer class="page-footer font-small blue line">
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2022 Created by : RTTM
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+    </div>
+
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.14.0/dist/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/font-awesome/6.1.0/js/all.js}"></script>
+<script th:src="@{/webjars/font-awesome/6.1.0/js/fontawesome.js}"></script>
+<script th:src="@{../../js/app.js}"></script>
+
+
+</body>
+</html>

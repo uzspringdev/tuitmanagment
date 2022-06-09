@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title></title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{../../css/app.css}"/>
+
+
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/}"><img th:class="logo-img" th:src="@{../../images/logo.png}"></a>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a th:href="@{/}"><i class="fa-solid fa-gauge mr-2"></i>Dashboard</a>
+            </li>
+            <li>
+
+                <a href="#studentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i>Talaba</a>
+                <ul class="collapse list-unstyled" id="studentSubmenu">
+                    <li>
+                        <a th:href="@{/student/add-student}">Talaba qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/student/list-student}">Talabalar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#facultySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-regular fa-building mr-2"></i>Fakultet</a>
+                <ul class="collapse list-unstyled" id="facultySubmenu">
+                    <li>
+                        <a th:href="@{/faculty/add-faculty}">Fakultet qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/faculty/list-faculty}">Fakultetlar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#specialitySubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
+                    <i class="fa-solid fa-briefcase mr-2"></i>Mutahasislik</a>
+                <ul class="collapse list-unstyled" id="specialitySubmenu">
+                    <li>
+                        <a th:href="@{/speciality/add-speciality}">Mutahasislik qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/speciality/list-speciality}">Mutahasisliklar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="active">
+                <a href="#orderSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-solid fa-file mr-2"></i>Buyruq</a>
+                <ul class="collapse list-unstyled" id="orderSubmenu">
+                    <li>
+                        <a th:href="@{/order/add-order}">Buyruq qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/order/list-order}">Buyruqlar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa-solid fa-users mr-2"></i>Admin</a>
+                <ul class="collapse list-unstyled" id="adminSubmenu">
+                    <li>
+                        <a th:href="@{/admin/add-admin}">Admin qo'shish</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/list-admin}">Adminlar ro'yxati</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+            </li>
+            <li>
+                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" th:class="mb-0">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fa-solid fa-align-justify"></i>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+
+                        <li class="nav-item active">
+                            <a th:href="@{/logout}">
+                                <i class="fa-solid fa-right-from-bracket mr-2"></i> Chiqish
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h2>Collapsible Sidebar Using Bootstrap 4</h2>
+        <form th:action="@{/order/update/{id}(id=${order.id})}" method="post" th:object="${order}">
+            <div class="form-group">
+                <!--Order number-->
+                <label for="orderNumber">Order number</label>
+                <input type="number" class="form-control" id="orderNumber" placeholder="Enter order number" name="orderNumber"  th:value="${order.orderNumber}" required>
+                <!--Name-->
+                <label for="orderName">Order name</label>
+                <input type="text" class="form-control" id="orderName" placeholder="Enter order name" name="orderName" th:value="${order.name}" required>
+                <!--Type of order-->
+                <label for="typeOfOrder">Type of order</label>
+                <input type="text" class="form-control" id="typeOfOrder" placeholder="Enter type of order" name="typeOfOrder" th:value="${order.typeOfOrder}"  required>
+                <!--Order date-->
+                <label for="orderDate">Order date</label>
+                <input type="date" class="form-control" id="orderDate" placeholder="Enter order date" name="orderDate" th:value="${order.orderDate}"  required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue line">
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2022 Created by : RTTM
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+    </div>
+
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.14.0/dist/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/font-awesome/6.1.0/js/all.js}"></script>
+<script th:src="@{/webjars/font-awesome/6.1.0/js/fontawesome.js}"></script>
+<script th:src="@{../../js/app.js}"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css} "/>
+    <!-- Custom styles for this template -->
+    <link th:rel="stylesheet" th:href="@{../../css/signin.css}"/>
+    <title>Login</title>
+</head>
+
+<body class="text-center">
+<form class="form-signin" th:action="@{/perform_login}" method="post">
+    <img class="mb-4" th:src="@{../../images/logo.png}" alt="" width="96" height="96">
+    <h6 class="mb-3 font-weight-normal">Tashkent University of Information Technologies</h6>
+    <label for="username" class="sr-only">Username</label>
+    <input type="text" id="username" class="form-control" name="username" placeholder="Username" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control  mt-2" name="password" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+</form>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.14.0/dist/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
