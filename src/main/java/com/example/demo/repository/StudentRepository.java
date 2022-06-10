@@ -25,7 +25,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             "(:specialityKeyword ='' or s.name = :specialityKeyword) and" +
             "(:orderKeyword ='' or o.name = :orderKeyword) and" +
             "(:paymentFormKeyword ='' or st.payment_form=:paymentFormKeyword) and" +
-            "(:groupNameKeyword ='' or st.group_name=:groupNameKeyword) " +   
+            "(:groupNameKeyword ='' or st.group_name=:groupNameKeyword) " +
             "order by p.last_name, p.first_name, p.patronymic", nativeQuery = true)
     List<Student> findAllByKeywords(
             @Param(value = "searchKeyword") String searchKeyword,
