@@ -165,7 +165,7 @@ public class StudentServiceImpl implements StudentService {
     public ResponseEntity<Student> getStudentById(Long id) {
         try {
             Optional<Student> optionalStudent = studentRepository.findById(id);
-            if (optionalStudent.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalStudent.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Student student = optionalStudent.get();
             return new ResponseEntity<>(student, HttpStatus.OK);
         } catch (Exception e) {
@@ -297,7 +297,7 @@ public class StudentServiceImpl implements StudentService {
     public ResponseEntity<Student> updateStudent(Long id, StudentDataTransferObject studentDto) {
         try {
             Optional<Student> optionalStudent = studentRepository.findById(id);
-            if (optionalStudent.isEmpty()) {
+            if (!optionalStudent.isPresent()) {
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
             Optional<Faculty> optionalFaculty = facultyRepository.findById(studentDto.getFacultyId());

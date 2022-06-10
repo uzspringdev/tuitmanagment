@@ -48,7 +48,7 @@ public class PermanentAddressServiceImpl implements PermanentAddressService {
     public ResponseEntity<PermanentAddress> getPermanentAddressById(Long id) {
         try {
             Optional<PermanentAddress> optionalPermanentAddress = permanentAddressRepository.findById(id);
-            if (optionalPermanentAddress.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalPermanentAddress.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             PermanentAddress permanentAddress = optionalPermanentAddress.get();
             return new ResponseEntity<>(permanentAddress, HttpStatus.OK);
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class PermanentAddressServiceImpl implements PermanentAddressService {
     public ResponseEntity<PermanentAddress> updatePermanentAddress(Long id, PermanentAddress permanentAddress) {
         try {
             Optional<PermanentAddress> optionalPermanentAddress = permanentAddressRepository.findById(id);
-            if (optionalPermanentAddress.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalPermanentAddress.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             PermanentAddress editedPermanentAddress = optionalPermanentAddress.get();
             editedPermanentAddress.setCountry(permanentAddress.getCountry());
             editedPermanentAddress.setRegion(permanentAddress.getRegion());

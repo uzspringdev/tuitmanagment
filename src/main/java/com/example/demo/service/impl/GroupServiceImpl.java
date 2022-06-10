@@ -45,7 +45,7 @@ public class GroupServiceImpl implements GroupService {
     public ResponseEntity<Group> getGroupById(Long id) {
         try {
             Optional<Group> optionalGroup = groupRepository.findById(id);
-            if (optionalGroup.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalGroup.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Group group = optionalGroup.get();
             return new ResponseEntity<>(group, HttpStatus.OK);
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class GroupServiceImpl implements GroupService {
     public ResponseEntity<Group> updateGroup(Long id, Group group) {
         try {
             Optional<Group> optionalGroup = groupRepository.findById(id);
-            if (optionalGroup.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalGroup.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Group editedGroup = optionalGroup.get();
             editedGroup.setName(group.getName());
             Group updatedGroup = groupRepository.save(editedGroup);

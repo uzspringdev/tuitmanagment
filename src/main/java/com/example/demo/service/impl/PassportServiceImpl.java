@@ -55,7 +55,7 @@ public class PassportServiceImpl implements PassportService {
     public ResponseEntity<Passport> getPassportById(Long id) {
         try {
             Optional<Passport> optionalPassport = passportRepository.findById(id);
-            if (optionalPassport.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalPassport.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Passport passport = optionalPassport.get();
             return new ResponseEntity<>(passport, HttpStatus.OK);
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class PassportServiceImpl implements PassportService {
     public ResponseEntity<Passport> updatePassport(Long id, Passport passport) {
         try {
             Optional<Passport> optionalPassport = passportRepository.findById(id);
-            if (optionalPassport.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalPassport.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Passport editedPassport = optionalPassport.get();
             //firstName, lastName, patronymic, citizenship, nationality, gender, dateOfBirth, passportNumber, pin
             editedPassport.setFirstName(passport.getFirstName());

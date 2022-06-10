@@ -53,7 +53,7 @@ public class CurrentAddressServiceImpl implements CurrentAddressService {
     public ResponseEntity<CurrentAddress> getCurrentAddressById(Long id) {
         try {
             Optional<CurrentAddress> optionalCurrentAddressOptional = currentAddressRepository.findById(id);
-            if (optionalCurrentAddressOptional.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalCurrentAddressOptional.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             CurrentAddress currentAddress = optionalCurrentAddressOptional.get();
 
             return new ResponseEntity<>(currentAddress, HttpStatus.OK);
@@ -67,7 +67,7 @@ public class CurrentAddressServiceImpl implements CurrentAddressService {
     public ResponseEntity<CurrentAddress> updateCurrentAddress(Long id, CurrentAddress currentAddress) {
         try {
             Optional<CurrentAddress> optionalCurrentAddressOptional = currentAddressRepository.findById(id);
-            if (optionalCurrentAddressOptional.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalCurrentAddressOptional.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             CurrentAddress editedCurrentAddress = optionalCurrentAddressOptional.get();
             editedCurrentAddress.setRegion(currentAddress.getRegion());
             editedCurrentAddress.setDistrict(currentAddress.getDistrict());

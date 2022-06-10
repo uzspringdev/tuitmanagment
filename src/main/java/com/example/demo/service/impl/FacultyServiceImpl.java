@@ -46,7 +46,7 @@ public class FacultyServiceImpl implements FacultyService {
     public ResponseEntity<Faculty> getFacultyById(Long id) {
         try {
             Optional<Faculty> optionalFaculty = facultyRepository.findById(id);
-            if (optionalFaculty.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalFaculty.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Faculty faculty = optionalFaculty.get();
             return new ResponseEntity<>(faculty, HttpStatus.OK);
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class FacultyServiceImpl implements FacultyService {
     public ResponseEntity<Faculty> updateFaculty(Long id, String facultyName) {
         try {
             Optional<Faculty> optionalFaculty = facultyRepository.findById(id);
-            if (optionalFaculty.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalFaculty.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Faculty editedFaculty = optionalFaculty.get();
             editedFaculty.setName(facultyName);
             Faculty updatedFaculty = facultyRepository.save(editedFaculty);

@@ -42,8 +42,7 @@ public class ContactServiceImpl implements ContactService {
     public ResponseEntity<Contact> getContactsById(Long id) {
         try {
             Optional<Contact> optionalContact = contactRepository.findById(id);
-            if (optionalContact.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(optionalContact.get(), HttpStatus.OK);
+            return optionalContact.map(contact -> new ResponseEntity<>(contact, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -53,7 +52,7 @@ public class ContactServiceImpl implements ContactService {
     public ResponseEntity<Contact> updateContact(Long id, Contact contact) {
         try {
             Optional<Contact> optionalContact = contactRepository.findById(id);
-            if (optionalContact.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalContact.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Contact editedContact = optionalContact.get();
             editedContact.setEmail(contact.getEmail());
             editedContact.setStudentPhone(contact.getStudentPhone());

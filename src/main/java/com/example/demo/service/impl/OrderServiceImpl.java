@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseEntity<Order> getOrderById(Long id) {
         try {
             Optional<Order> optionalOrder = orderRepository.findById(id);
-            if (optionalOrder.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalOrder.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Order order = optionalOrder.get();
             return new ResponseEntity<>(order, HttpStatus.OK);
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseEntity<Order> updateOrder(Long id, Order order) {
         try {
             Optional<Order> optionalOrder = orderRepository.findById(id);
-            if (optionalOrder.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalOrder.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Order editedOrder = optionalOrder.get();
             editedOrder.setOrderNumber(order.getOrderNumber());
             editedOrder.setName(order.getName());

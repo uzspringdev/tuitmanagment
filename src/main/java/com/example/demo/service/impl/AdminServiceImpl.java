@@ -52,7 +52,7 @@ public class AdminServiceImpl implements AdminService {
     public ResponseEntity<Admin> getAdminById(Long id) {
         try {
             Optional<Admin> optionalAdmin = adminRepository.findById(id);
-            if (optionalAdmin.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalAdmin.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Admin admin = optionalAdmin.get();
             return new ResponseEntity<>(admin, HttpStatus.OK);
         } catch (Exception e) {

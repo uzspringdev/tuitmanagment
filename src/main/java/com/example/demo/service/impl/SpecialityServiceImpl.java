@@ -49,7 +49,7 @@ public class SpecialityServiceImpl implements SpecialityService {
     public ResponseEntity<Speciality> getSpecialityById(Long id) {
         try {
             Optional<Speciality> optionalSpeciality = specialityRepository.findById(id);
-            if (optionalSpeciality.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalSpeciality.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Speciality speciality = optionalSpeciality.get();
             return new ResponseEntity<>(speciality, HttpStatus.OK);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class SpecialityServiceImpl implements SpecialityService {
     public ResponseEntity<Speciality> updateSpeciality(Long id, Speciality speciality) {
         try {
             Optional<Speciality> optionalSpeciality = specialityRepository.findById(id);
-            if (optionalSpeciality.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            if (!optionalSpeciality.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             Speciality editedSpeciality = optionalSpeciality.get();
             editedSpeciality.setCode(speciality.getCode());
             editedSpeciality.setName(speciality.getName());
