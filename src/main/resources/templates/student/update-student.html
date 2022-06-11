@@ -410,12 +410,12 @@
                                         <select type="number" class="form-control" id="country" name="permanentCountry"
                                                 required>
                                             <option value="">select</option>
-                                            <option value="Uzbekistan" selected>Uzbekistan</option>
-                                            <option value="Russia">Russia</option>
-                                            <option value="Kazakhstan">Kazakhstan</option>
-                                            <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                            <option value="Tajikistan">Tajikistan</option>
-                                            <option value="Turkmenistan">Turkmenistan</option>
+                                            <option value="Uzbekistan" th:selected="${'Uzbekistan'== student.permanentAddress.country}">Uzbekistan</option>
+                                            <option value="Russia" th:selected="${'Russia'== student.permanentAddress.country}">Russia</option>
+                                            <option value="Kazakhstan" th:selected="${'Kazakhstan'== student.permanentAddress.country}">Kazakhstan</option>
+                                            <option value="Kyrgyzstan" th:selected="${'Kyrgyzstan'== student.permanentAddress.country}">Kyrgyzstan</option>
+                                            <option value="Tajikistan" th:selected="${'Tajikistan'== student.permanentAddress.country}">Tajikistan</option>
+                                            <option value="Turkmenistan" th:selected="${'Turkmenistan'== student.permanentAddress.country}">Turkmenistan</option>
                                         </select>
                                     </div>
                                 </div>
@@ -523,8 +523,8 @@
                                         <select type="number" class="form-control" id="categoryRoommates"
                                                 name="categoryRoommates" required>
                                             <option value="">select</option>
-                                            <option value="Parent">Parent</option>
-                                            <option value="Family">Family</option>
+                                            <option value="Parent" th:selected="${'Parent'== student.currentAddress.categoryRoommates}">Parent</option>
+                                            <option value="Family" th:selected="${'Family'== student.currentAddress.categoryRoommates}">Family</option>
                                         </select>
                                     </div>
                                 </div>
