@@ -57,9 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=true").permitAll()
                 .and()
                 .logout().logoutUrl("/logout").permitAll();
-        http.requiresChannel()
-      .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-      .requiresSecure();
     }
 
     @Bean
