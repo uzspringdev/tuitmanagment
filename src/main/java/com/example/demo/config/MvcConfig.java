@@ -23,6 +23,9 @@ public class MvcConfig implements WebMvcConfigurer {
                 //for Unix: file:/opt/files
                 //TODO: use path here
                 .addResourceLocations("file:uploads/");
+        registry
+                .addResourceHandler("/resources/static/**")
+                .addResourceLocations("/resources/static/");
 
 
     }
@@ -32,8 +35,8 @@ public class MvcConfig implements WebMvcConfigurer {
         return new WebMvcConfigurer() {
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
-                registry.addResourceHandler("/resources/**")
-                        .addResourceLocations("/resources/")
+                registry.addResourceHandler("/webjars/**")
+                        .addResourceLocations("/webjars/")
                         .setCachePeriod(31556926);
             }
         };
