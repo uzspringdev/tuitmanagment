@@ -23,9 +23,6 @@ public class MvcConfig implements WebMvcConfigurer {
                 //for Unix: file:/opt/files
                 //TODO: use path here
                 .addResourceLocations("file:uploads/");
-        registry
-                .addResourceHandler("/resources/static/**")
-                .addResourceLocations("/resources/static/");
 
 
     }
