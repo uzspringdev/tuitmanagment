@@ -34,7 +34,7 @@ public class MvcConfig implements WebMvcConfigurer {
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 registry.addResourceHandler("/webjars/**")
                         .addResourceLocations("/webjars/")
-                        .setCachePeriod(31556926);
+                        .setCachePeriod(1);
             }
         };
     }
