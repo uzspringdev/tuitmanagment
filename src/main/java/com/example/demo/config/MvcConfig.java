@@ -13,7 +13,6 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
-
 public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -21,15 +20,12 @@ public class MvcConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/uploads/**")
                 //for Unix: file:/opt/files
-                //TODO: use path here
                 .addResourceLocations("file:uploads/");
-
-
     }
 
     @Bean
     public WebMvcConfigurer configurer () {
-        return new WebMvcConfigurer() {
+        return  new WebMvcConfigurer() {
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 registry.addResourceHandler("/webjars/**")
@@ -44,7 +40,6 @@ public class MvcConfig implements WebMvcConfigurer {
     public ClassLoaderTemplateResolver templateResolver() {
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-
         templateResolver.setPrefix("templates/");
         templateResolver.setCacheable(false);
         templateResolver.setSuffix(".html");

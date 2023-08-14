@@ -71,7 +71,7 @@
                 </ul>
             </li>
             <li>
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li class="active" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -125,15 +125,15 @@
             </div>
         </nav>
 
-        <h2>Collapsible Sidebar Using Bootstrap 4</h2>
+        <h2>Adminni tahrirlash</h2>
         <form th:action="@{/admin/update/{id}(id=${admin.id})}" method="post" th:object="${admin}">
             <div class="form-group">
                 <!--Order number-->
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" th:value="${admin.username}" required>
+                <label for="username">Faydalanuvchi nomi</label>
+                <input type="text" class="form-control" id="username" placeholder="Faydalanuvchi nomini kiriting" name="username" th:value="${admin.username}" required>
                 <!--Name-->
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter order name" name="password" required>
+                <label for="password">Parol</label>
+                <input type="password" class="form-control" id="password" placeholder="Parolni kiriting" name="password" required>
                 <fieldset class="form-group mt-1"  data-type = "horizontal">
                     <!--Type of order-->
                     <label for="adminRole">Admin</label>
@@ -143,7 +143,7 @@
                     <input type="checkbox"  id="userRole" value="ROLE_USER" placeholder="Enter order date" name="userRole" >
                 </fieldset>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Saqlash</button>
         </form>
 
         <!-- Footer -->

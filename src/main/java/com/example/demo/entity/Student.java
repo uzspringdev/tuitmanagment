@@ -60,7 +60,6 @@ public class Student {
     @ManyToOne
     private Speciality speciality;
 
-
     @ManyToOne
     private Order order;
 

@@ -74,7 +74,7 @@
                 </ul>
             </li>
             <li>
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -123,7 +123,7 @@
             <div id="contentID">
                 <!--Information about passport data-->
                 <div class="panel panel-default shadow border-radius mb-2 top-border-radius">
-                    <div class="panel-heading" style="background-color: #7386D5; padding: 8px 15px;color: white">Passport Date
+                    <div class="panel-heading" style="background-color: #7386D5; padding: 8px 15px;color: white">Pasport Ma`lumotlari
                     </div>
                     <div class="panel-body" style="padding: 15px">
                         <div class="row">
@@ -137,21 +137,21 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="citizenship">Citizenship</label>
+                                            <label for="citizenship">Fuqaroligi</label>
                                             <p th:text="${student.passport.citizenship}" id="citizenship"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="passportNumber">Passport Number</label>
+                                            <label for="passportNumber">Pasport seriyasi</label>
                                             <p th:text="${student.passport.passportNumber}" id="passportNumber"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="pin">PIN</label>
+                                            <label for="pin">JSHSHR</label>
                                             <p th:text="${student.passport.pin}" id="pin"></p>
                                         </div>
                                     </div>
@@ -160,21 +160,21 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="lastName">Lastname</label>
+                                            <label for="lastName">Familiyasi</label>
                                             <p th:text="${student.passport.lastName}" id="lastName"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="firstName">Firstname</label>
+                                            <label for="firstName">Ismi</label>
                                             <p th:text="${student.passport.firstName}" id="firstName"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="patronymic">Patronymic</label>
+                                            <label for="patronymic">Otasining ismi</label>
                                             <p th:text="${student.passport.patronymic}" id="patronymic"></p>
                                         </div>
                                     </div>
@@ -183,7 +183,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="dateOfBirth">Date of birth</label>
+                                            <label for="dateOfBirth">Tug`ulgan sanasi</label>
                                             <p th:text="${student.passport.dateOfBirth.toString()}"
                                                id="dateOfBirth"></p>
                                         </div>
@@ -191,14 +191,14 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="gender">Gender</label>
+                                            <label for="gender">Jinsi</label>
                                             <p th:text="${student.passport.gender}" id="gender"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="nationality">Nationality</label>
+                                            <label for="nationality">Millati</label>
                                             <p th:text="${student.passport.nationality}" id="nationality"></p>
                                         </div>
                                     </div>
@@ -212,28 +212,28 @@
                 <div class="panel panel-default shadow border-radius">
                     <div class="panel-heading"
                          style="background-color: #7386D5; padding: 8px 15px; border: 1px solid transparent;color: white">
-                        Information about education
+                        Ta`lim haqida ma`lumot
                     </div>
                     <div class="panel-body" style="padding: 15px">
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <!--Order number-->
-                                    <label for="faculty">Faculty</label>
+                                    <label for="faculty">Fakulteti</label>
                                     <p id="faculty" th:text="${student.faculty.name}"></p>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <!--Order number-->
-                                    <label for="speciality">Speciality</label>
+                                    <label for="speciality">Mutahasisligi</label>
                                     <p th:text="${student.speciality.name}" id="speciality"></p>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <!--Order number-->
-                                    <label for="groupName">Group Name</label>
+                                    <label for="groupName">Guruhi</label>
                                     <p id="groupName"
                                        th:text="${student.groupName}"></p>
                                 </div>
@@ -243,7 +243,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <!--Order number-->
-                                    <label for="admissionDate">Admission Date</label>
+                                    <label for="admissionDate">Qabul sanasi</label>
                                     <p id="admissionDate"
                                        th:text="${student.admissionDate.toString()}"></p>
                                 </div>
@@ -251,14 +251,14 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <!--Order number-->
-                                    <label for="paymentForm">Payment form</label>
+                                    <label for="paymentForm">To`lov turi</label>
                                     <p th:text="${student.paymentForm}" id="paymentForm"></p>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <!--Order number-->
-                                    <label for="admissionOrder">Order</label>
+                                    <label for="admissionOrder">Buyruq</label>
                                     <p th:text="${student.order.name}" id="admissionOrder"></p>
                                 </div>
                             </div>

@@ -70,7 +70,7 @@
                 </ul>
             </li>
             <li>
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -114,7 +114,7 @@
             </div>
         </nav>
 
-        <h2>Statistics</h2>
+        <h2>Statistika</h2>
         <div class="line"></div>
         <div class="container">
             <section id="tabs" class="project-tabs">
@@ -124,11 +124,11 @@
                             <nav>
                                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
-                                       href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">University</a>
+                                       href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Universitet</a>
                                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                       href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Faculty</a>
+                                       href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Fakultet</a>
                                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
-                                       href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Speciality</a>
+                                       href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Mutahasislik</a>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
@@ -140,7 +140,7 @@
                                                 <div class="container-fluid d-flex justify-content-center col-sm-6">
                                                     <div class="col-sm-12 col-md-12">
                                                         <div class="card">
-                                                            <div class="card-header">University</div>
+                                                            <div class="card-header">Universitet</div>
                                                             <div class="card-body">
                                                                 <div class="chartjs-size-monitor"
                                                                      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -163,7 +163,7 @@
                                                 <div class="container-fluid d-flex justify-content-center  col-sm-6">
                                                     <div class="col-sm-12 col-md-12">
                                                         <div class="card">
-                                                            <div class="card-header">Faculty</div>
+                                                            <div class="card-header">Fakultet</div>
                                                             <div class="card-body">
                                                                 <div class="chartjs-size-monitor"
                                                                      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -281,7 +281,7 @@
         const myLineChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ["Male", "Female"],
+                labels: ["Erkak", "Ayol"],
                 datasets: [{
                     data: [maleCount, femaleCount],
                     backgroundColor: ["rgba(115,134,213)", "rgba(165,182,255)"]
@@ -290,7 +290,7 @@
             options: {
                 title: {
                     display: true,
-                    text: 'Total students'
+                    text: 'Umumiy talabalar'
                 }
             }
         });
@@ -313,7 +313,7 @@
             options: {
                 title: {
                     display: true,
-                    text: 'Total student'
+                    text: 'Umumiy talabalar'
                 }
             }
         });

@@ -70,7 +70,7 @@
                 </ul>
             </li>
             <li>
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -135,7 +135,7 @@
                         <div class="container-fluid">
                             <div class="row" style="padding: 12px">
                                 <div class="col pr-2 w-75">
-                                    <input class="form-control" placeholder="search" id="keyword" name="keyword"
+                                    <input class="form-control" placeholder="qidiruv" id="keyword" name="keyword"
                                            th:value="${keyword}"/>
                                 </div>
                                 <div>
@@ -154,10 +154,10 @@
             <thead>
             <tr>
                 <th scope="col" class="w-5">#</th>
-                <th scope="col" class="w-15">Order Number</th>
-                <th scope="col" class="w-20">Name</th>
-                <th scope="col" class="w-20">Type of Order</th>
-                <th scope="col" class="w-20">Order date</th>
+                <th scope="col" class="w-15">Buyruq nomeri</th>
+                <th scope="col" class="w-20">Buyruq nomi</th>
+                <th scope="col" class="w-20">Buyruq turi</th>
+                <th scope="col" class="w-20">Buyruq sanasi</th>
                 <th scope="col" class="w-20"><span class="float-right mr-4">Options</span></th>
             </tr>
             </thead>

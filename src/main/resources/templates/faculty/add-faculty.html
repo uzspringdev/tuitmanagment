@@ -70,7 +70,7 @@
                 </ul>
             </li>
             <li>
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -120,12 +120,12 @@
         <h2>Add Faculty</h2>
         <form th:action="@{/faculty}" method="post">
             <div class="form-group">
-                <label for="facultyName">Faculty name</label>
+                <label for="facultyName">Fakultet</label>
                 <input type="text" class="form-control" id="facultyName" aria-describedby="emailHelp"
-                       placeholder="Enter faculty name" name="name">
-                <small id="emailHelp" class="form-text text-muted">Faculty Name</small>
+                       placeholder="Fakultet nomini kiriting" name="name">
+               <!-- <small id="emailHelp" class="form-text text-muted">Fakultet</small>-->
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Saqlash</button>
         </form>
 
         <!-- Footer -->

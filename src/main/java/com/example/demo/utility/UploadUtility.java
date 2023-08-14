@@ -35,7 +35,7 @@ public class UploadUtility {
             path = Paths.get(UPLOAD_DIR + fileName);
             Files.copy(photo.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             url = DOWNLOAD_DIR + fileName;
-            Files.deleteIfExists(Paths.get(photoUrl.replace("../.","")));
+            //Files.deleteIfExists(Paths.get(photoUrl.replace("../.","")));
 
         } catch (IOException e) {
             e.printStackTrace();

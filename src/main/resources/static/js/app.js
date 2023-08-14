@@ -39,16 +39,17 @@ function clearPhoto() {
     document.getElementById("preview").src = "img/no-image.jpg";
     document.getElementById('photo').value = "";
 }
+
 //Generate resume
-$('#savePDF').click(function() {
+$('#savePDF').click(function () {
 
     const element = document.getElementById('contentID');
     const opt = {
-        margin:       1,
-        filename:     'student.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+        margin: 1,
+        filename: 'student.pdf',
+        image: {type: 'jpeg', quality: 0.98},
+        html2canvas: {scale: 2},
+        jsPDF: {unit: 'in', format: 'letter', orientation: 'landscape'}
     };
     // Avoid page-breaks on all elements, and add one before #page2el.
     /*html2pdf().set({
@@ -58,6 +59,22 @@ $('#savePDF').click(function() {
 // New Promise-based usage:
     html2pdf().set(opt).from(element).save();
 
-/*// Old monolithic-style usage:
-    html2pdf(element, opt);*/
+    /*// Old monolithic-style usage:
+        html2pdf(element, opt);*/
+});
+//Dormitory checker
+$('input.dormitory').on('change', function () {
+    $('input.dormitory').not(this).prop('checked', false);
+    $(".current-address").hide()
+});
+
+$(".current-address").hide()
+
+$('#other').on("change", function () {
+    $(".current-address").hide() //hide all checkboxes
+    //loop through checked checkboxes
+    $('input[type="checkbox"]:checked').each(function () {
+        const inputValue = $(this).attr("value");
+        $('.current-address').show(); //show them
+    })
 });

@@ -72,7 +72,7 @@
                 </ul>
             </li>
             <li>
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -118,23 +118,23 @@
             </div>
         </nav>
 
-        <h2>Collapsible Sidebar Using Bootstrap 4</h2>
+        <h2>Buyruqni tahrirlash</h2>
         <form th:action="@{/order/update/{id}(id=${order.id})}" method="post" th:object="${order}">
             <div class="form-group">
                 <!--Order number-->
-                <label for="orderNumber">Order number</label>
-                <input type="number" class="form-control" id="orderNumber" placeholder="Enter order number" name="orderNumber"  th:value="${order.orderNumber}" required>
+                <label for="orderNumber">Buyruq nomeri</label>
+                <input type="number" class="form-control" id="orderNumber" placeholder="Buyruq nomerini kiriting" name="orderNumber"  th:value="${order.orderNumber}" required>
                 <!--Name-->
-                <label for="orderName">Order name</label>
-                <input type="text" class="form-control" id="orderName" placeholder="Enter order name" name="orderName" th:value="${order.name}" required>
+                <label for="orderName">Buyruq nomi</label>
+                <input type="text" class="form-control" id="orderName" placeholder="Buyruq nomini kiriting" name="orderName" th:value="${order.name}" required>
                 <!--Type of order-->
-                <label for="typeOfOrder">Type of order</label>
-                <input type="text" class="form-control" id="typeOfOrder" placeholder="Enter type of order" name="typeOfOrder" th:value="${order.typeOfOrder}"  required>
+                <label for="typeOfOrder">Buyruq turi</label>
+                <input type="text" class="form-control" id="typeOfOrder" placeholder="Buyruq turini kiriting" name="typeOfOrder" th:value="${order.typeOfOrder}"  required>
                 <!--Order date-->
-                <label for="orderDate">Order date</label>
+                <label for="orderDate">Buyruq sanasi</label>
                 <input type="date" class="form-control" id="orderDate" placeholder="Enter order date" name="orderDate" th:value="${order.orderDate}"  required>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Saqlash</button>
         </form>
 
         <!-- Footer -->

@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/currentAddress")
 public class CurrentAddressController {
-
     private final CurrentAddressService currentAddressService;
 
     public CurrentAddressController(CurrentAddressService currentAddressService) {

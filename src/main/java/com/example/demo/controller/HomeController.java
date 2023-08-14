@@ -43,8 +43,8 @@ public class HomeController {
 
     @GetMapping(value = "/",produces = MediaType.TEXT_HTML_VALUE)
     public String homePage(Model model) {
-        Long maleCount = studentRepository.countAllByPassportGender("Male");
-        Long femaleCount = studentRepository.countAllByPassportGender("Female");
+        Long maleCount = studentRepository.countAllByPassportGender("Erkak");
+        Long femaleCount = studentRepository.countAllByPassportGender("Ayol");
         List<String> facultyNameList = new ArrayList<>();
         List<Long> studentCountList = new ArrayList<>();
         for (Faculty faculty : facultyRepository.findAll()) {

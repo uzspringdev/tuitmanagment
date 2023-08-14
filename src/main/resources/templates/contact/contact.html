@@ -74,7 +74,7 @@
                 </ul>
             </li>
             <li class="active">
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -129,17 +129,17 @@
                         <div class="panel panel-default shadow border-radius">
                             <div class="panel-heading"
                                  style="background-color: #f5f5f5; padding: 8px 15px; border: 1px solid transparent;">
-                                Information about education
+                                Ta'lim haqida ma'lumot
                             </div>
                             <div class="panel-body" style="padding: 15px">
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="faculty">Faculty</label>
+                                            <label for="faculty">Fakulteti</label>
                                             <select type="text" class="form-control" id="faculty" th:name="faculty"
                                                     th:object="${faculties}">
-                                                <option value="">select</option>
+                                                <option value="">Tanlang</option>
                                                 <option th:each="f : ${faculties}" th:value="${f.name}"
                                                         th:text="${f.name}"
                                                         th:selected="${f.name.equals(faculty)}"></option>
@@ -149,10 +149,10 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="speciality">Speciality</label>
+                                            <label for="speciality">Mutahasisligi</label>
                                             <select type="number" class="form-control" id="speciality"
                                                     th:object="${specialities}" th:name="speciality">
-                                                <option value="">select</option>
+                                                <option value="">Tanlang</option>
                                                 <option th:each="s : ${specialities}" th:value="${s.name}"
                                                         th:text="${s.name}" th:selected="${s.name.equals(speciality)}">
                                                 </option>
@@ -162,10 +162,10 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="groupName">Group Name</label>
+                                            <label for="groupName">Guruhi</label>
                                             <select type="number" class="form-control" id="groupName"
                                                     th:object="${groupList}" th:name="groupName">
-                                                <option value="">select</option>
+                                                <option value="">Tanlang</option>
                                                 <option th:each="gr : ${groupList}" th:value="${gr}"
                                                         th:text="${gr}" th:selected="${gr.equals(groupName)}">
                                                 </option>
@@ -178,7 +178,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="admissionDate">Admission Date</label>
+                                            <label for="admissionDate">Qabul sanasi</label>
                                             <input type="date" class="form-control" id="admissionDate"
                                                    th:name="admissionDate" th:text="${admissionDate}"/>
                                         </div>
@@ -186,15 +186,15 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="paymentForm">Payment form</label>
+                                            <label for="paymentForm">To'lov turi</label>
                                             <select type="number" class="form-control" id="paymentForm"
                                                     th:name="paymentForm">
                                                 <option value="">select</option>
-                                                <option value="Budget" th:selected="${paymentForm.equals('Budget')}">
+                                                <option value="Budjet" th:selected="${paymentForm.equals('Budjet')}">
                                                     Budget
                                                 </option>
-                                                <option value="Contract" th:selected="${paymentForm.equals('Contract')}">
-                                                    Contract
+                                                <option value="Kontrakt" th:selected="${paymentForm.equals('Kontrakt')}">
+                                                    Kontrakt
                                                 </option>
                                             </select>
                                         </div>
@@ -202,10 +202,10 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <!--Order number-->
-                                            <label for="admissionOrder">Order</label>
+                                            <label for="admissionOrder">Buyruq</label>
                                             <select type="number" class="form-control" id="admissionOrder"
                                                     th:name="orderName" th:object="${orders}">
-                                                <option value="">Select</option>
+                                                <option value="">Tanlang</option>
                                                 <option th:each="order : ${orders}"
                                                         th:selected="${order.name.equals(orderName)}"
                                                         th:value="${order.name}" th:text="${order.name}"></option>
@@ -218,7 +218,7 @@
                         <div class="panel panel-default shadow border-radius mt-2">
                             <div class="panel-heading"
                                  style="background-color: #f5f5f5; padding: 8px 15px; border: 1px solid transparent;">
-                                Contact
+                                Aloqa
                             </div>
                             <div class="panel-body" style="padding: 15px">
                                 <div class="row align-self-center">
@@ -226,7 +226,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12 form-group">
                                                     <label for="message">
-                                                        Message:</label>
+                                                        Xabar:</label>
                                                     <textarea class="form-control" type="textarea" name="message" id="message" maxlength="6000" rows="7"></textarea>
                                                 </div>
                                             </div>

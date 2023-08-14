@@ -4,6 +4,7 @@ import com.example.demo.entity.*;
 import com.example.demo.payload.StudentDataTransferObject;
 import com.example.demo.payload.StudentDto;
 import com.example.demo.service.*;
+import com.example.demo.utility.DormitoryAddressWriter;
 import com.example.demo.utility.ExistenceChecker;
 import com.example.demo.utility.UploadUtility;
 import org.springframework.core.io.InputStreamResource;
@@ -35,14 +36,16 @@ public class StudentController {
     private final OrderService orderService;
     private final UploadUtility uploadUtility;
     private final StudentExcelService studentExcelService;
+    private final DormitoryAddressWriter dormitoryAddressWriter;
 
-    public StudentController(StudentService studentService, FacultyService facultyService, SpecialityService specialityService, OrderService orderService, UploadUtility uploadUtility, StudentExcelService studentExcelService) {
+    public StudentController(StudentService studentService, FacultyService facultyService, SpecialityService specialityService, OrderService orderService, UploadUtility uploadUtility, StudentExcelService studentExcelService, DormitoryAddressWriter dormitoryAddressWriter) {
         this.studentService = studentService;
         this.facultyService = facultyService;
         this.specialityService = specialityService;
         this.orderService = orderService;
         this.uploadUtility = uploadUtility;
         this.studentExcelService = studentExcelService;
+        this.dormitoryAddressWriter = dormitoryAddressWriter;
     }
 
     //CREATE
@@ -64,39 +67,40 @@ public class StudentController {
     //CREATE STUDENT
     @PostMapping(value = "/add-student")
     String createStudent(
-            @RequestParam("studentPhoto") MultipartFile photo,
-            @RequestParam("paymentForm") String paymentForm,
-            @RequestParam("admissionDate") String admissionDate,
-            @RequestParam("socialCategory") String socialCategory,
-            @RequestParam("studentCategory") String studentCategory,
-            @RequestParam("previousEducation") String previousEducation,
-            @RequestParam("groupName") String groupName,
+            @RequestParam(value = "studentPhoto") MultipartFile photo,
+            @RequestParam(value = "paymentForm") String paymentForm,
+            @RequestParam(value = "admissionDate") String admissionDate,
+            @RequestParam(value = "socialCategory") String socialCategory,
+            @RequestParam(value = "studentCategory") String studentCategory,
+            @RequestParam(value = "previousEducation") String previousEducation,
+            @RequestParam(value = "groupName") String groupName,
             /*permanent address data*/
-            @RequestParam("permanentCountry") String permanentCountry,
-            @RequestParam("permanentRegion") String permanentRegion,
-            @RequestParam("permanentDistrict") String permanentDistrict,
-            @RequestParam("permanentAddress") String permanentAddress,
+            @RequestParam(value = "permanentCountry") String permanentCountry,
+            @RequestParam(value = "permanentRegion") String permanentRegion,
+            @RequestParam(value = "permanentDistrict") String permanentDistrict,
+            @RequestParam(value = "permanentAddress") String permanentAddress,
             /*current address data*/
-            @RequestParam("currentRegion") String currentRegion,
-            @RequestParam("currentDistrict") String currentDistrict,
-            @RequestParam("currentAddress") String currentAddress,
-            @RequestParam("countRoommates") Integer countRoommates,
-            @RequestParam("categoryRoommates") String categoryRoommates,
-            @RequestParam("statusResidence") String statusResidence,
+            @RequestParam(value = "dormitory", defaultValue = "") String dormitory,
+            @RequestParam(value = "currentRegion", defaultValue = "") String currentRegion,
+            @RequestParam(value = "currentDistrict", defaultValue = "") String currentDistrict,
+            @RequestParam(value = "currentAddress", defaultValue = "") String currentAddress,
+            @RequestParam(value = "countRoommates", defaultValue = "") Integer countRoommates,
+            @RequestParam(value = "categoryRoommates", defaultValue = "") String categoryRoommates,
+            @RequestParam(value = "statusResidence", defaultValue = "") String statusResidence,
             /*contact data*/
-            @RequestParam("email") String email,
-            @RequestParam("studentPhone") String studentPhone,
-            @RequestParam("parentPhone") String parentPhone,
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "studentPhone") String studentPhone,
+            @RequestParam(value = "parentPhone") String parentPhone,
             /*passport data*/
-            @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName,
-            @RequestParam("patronymic") String patronymic,
-            @RequestParam("citizenship") String citizenship,
-            @RequestParam("nationality") String nationality,
-            @RequestParam("gender") String gender,
-            @RequestParam("dateOfBirth") String dateOfBirth,
-            @RequestParam("passportNumber") String passportNumber,
-            @RequestParam("pin") String pin,
+            @RequestParam(value = "firstName") String firstName,
+            @RequestParam(value = "lastName") String lastName,
+            @RequestParam(value = "patronymic") String patronymic,
+            @RequestParam(value = "citizenship") String citizenship,
+            @RequestParam(value = "nationality") String nationality,
+            @RequestParam(value = "gender") String gender,
+            @RequestParam(value = "dateOfBirth") String dateOfBirth,
+            @RequestParam(value = "passportNumber") String passportNumber,
+            @RequestParam(value = "pin") String pin,
             /*faculty id*/
             @RequestParam("facultyId") Long facultyId,
             /*speciality id*/
@@ -105,14 +109,19 @@ public class StudentController {
             @RequestParam("orderId") Long orderId,
             RedirectAttributes redirectAttributes
     ) {
+        CurrentAddress cAddress;
         if (ExistenceChecker.isExists(redirectAttributes, email, passportNumber, pin, studentPhone)) {
             return "redirect:/student/add-student";
         }
-
+        System.out.println(dormitory);
+        if (dormitory.equals("other")) {
+            cAddress = new CurrentAddress(currentRegion, currentDistrict, currentAddress, countRoommates, categoryRoommates, statusResidence);
+        } else {
+            cAddress = dormitoryAddressWriter.writer(dormitory);
+        }
         LocalDate date = LocalDate.parse(dateOfBirth);
         LocalDate dateOfAdmission = LocalDate.parse(admissionDate);
         PermanentAddress pAddress = new PermanentAddress(permanentCountry, permanentRegion, permanentDistrict, permanentAddress);
-        CurrentAddress cAddress = new CurrentAddress(currentRegion, currentDistrict, currentAddress, countRoommates, categoryRoommates, statusResidence);
         Contact contact = new Contact(email, studentPhone, parentPhone);
         Passport passport = new Passport(firstName, lastName, patronymic, citizenship, nationality, gender, date, passportNumber, pin);
         String photoUrl = uploadUtility.uploadPhoto(photo, "");

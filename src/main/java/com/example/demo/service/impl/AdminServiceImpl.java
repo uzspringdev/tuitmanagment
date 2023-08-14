@@ -37,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+//shu project
     @Override
     public ResponseEntity<List<Admin>> getAllAdmins() {
         try {

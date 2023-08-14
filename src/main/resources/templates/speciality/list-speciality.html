@@ -71,7 +71,7 @@
                 </ul>
             </li>
             <li>
-                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Contact</a>
+                <a th:href="@{/contact}"><i class="fa-solid fa-envelope mr-2"> </i>Aloqa</a>
             </li>
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -127,7 +127,7 @@
                         <div class="container-fluid">
                             <div class="row" style="padding: 12px">
                                 <div class="col pr-2 w-75">
-                                    <input class="form-control" placeholder="search" id="keyword" name="keyword"
+                                    <input class="form-control" placeholder="qidiruv" id="keyword" name="keyword"
                                            th:value="${keyword}"/>
                                 </div>
                                 <div>
@@ -146,8 +146,8 @@
             <thead>
             <tr>
                 <th scope="col" class="w-5">#</th>
-                <th scope="col" class="w-15">Code</th>
-                <th scope="col" class="w-55">Name</th>
+                <th scope="col" class="w-15">Kod</th>
+                <th scope="col" class="w-55">Mutahasislik</th>
                 <th scope="col" class="w-25"><span class="float-right mr-4">Options</span></th>
             </tr>
             </thead><!--specialityPage.pageable.getPageNumber()*specialityPage.size+1-->

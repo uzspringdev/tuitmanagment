@@ -21,6 +21,7 @@ public class SpecialityExcelHelper {
             Workbook workbook = new HSSFWorkbook();
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             Sheet sheet = workbook.createSheet(SHEET);
+
             //HEADER
             Row headerRow = sheet.createRow(0);
             for (int col = 0; col < HEADERS.length; col++) {
@@ -30,7 +31,7 @@ public class SpecialityExcelHelper {
             int rowIdx = 1;
             for (Speciality speciality : specialities) {
                 Row row = sheet.createRow(rowIdx++);
-                row.createCell(0).setCellValue(rowIdx-1);
+                row.createCell(0).setCellValue(rowIdx - 1);
                 row.createCell(1).setCellValue(speciality.getCode());
                 row.createCell(2).setCellValue(speciality.getName());
                 row.createCell(3).setCellValue(speciality.getTypeOfEducation());

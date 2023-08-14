@@ -63,7 +63,6 @@ public class AdminController {
         return "/admin/add-admin";
     }
 
-
     //READ
     @GetMapping(value = "/list-admin")
     public String getAllAdmins(Model model,
@@ -85,7 +84,6 @@ public class AdminController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-
         return "/admin/list-admin";
     }
 
@@ -98,7 +96,8 @@ public class AdminController {
 
     //UPDATE
     @PostMapping(value = "/update/{id}")
-    public String updateAdmin(@PathVariable Long id, @RequestParam(value = "username") String username,
+    public String updateAdmin(@PathVariable Long id,
+                              @RequestParam(value = "username") String username,
                               @RequestParam(value = "password") String password,
                               @RequestParam(value = "adminRole") Optional<String> adr,
                               @RequestParam(value = "userRole") Optional<String> usr) {
